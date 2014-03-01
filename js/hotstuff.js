@@ -64,9 +64,10 @@ function showRecommend(){
 var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
 
-function showRecos(data){
+function showRecos(jsonstring){
 	alert("in show recos");
-	alert(data);
+	alert(jsonstring);
+	var data = JSON.parse(jsonstring);
 	alert(data[0].what);
 	recoHtml = '<h4>Yo, check these out:</h4>';
 	for (i=0; i<data.length;i++) {
