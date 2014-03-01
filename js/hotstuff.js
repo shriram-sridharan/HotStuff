@@ -159,7 +159,8 @@ function getLoginStatus() {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
 			document.getElementById('header').innerHTML = headerWithButton;
-			ocument.getElementById('recommend').innerHTML = recos;
+			document.getElementById('recommend').innerHTML = recos;
+		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			document.getElementById('header').innerHTML = header;
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
