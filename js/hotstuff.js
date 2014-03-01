@@ -62,7 +62,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 					} else {
 						var data = document.getElementById('data');
 						response.data.forEach(function(item) {
-							data.innerHTML = "Id=" + ritem.id + ", UN=" + item.username + ", accessToken=" + accessToken;
+							data.innerHTML = "Id=" + item.id + ", UN=" + item.username + ", accessToken=" + accessToken;
 						});
 					}
 				});
