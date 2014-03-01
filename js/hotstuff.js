@@ -75,19 +75,18 @@ function getloc() {
 	navigator.geolocation.getCurrentPosition(function(position) {
 		newlatitude = position.coords.latitude;
 		newlongitude = position.coords.longitude;
-		
-		var R = 6371; // km
+
+		var R = 6371;
+		// km
 		var x1 = newlatitude - latitude;
 		var dLat = x1 * Math.PI / 180;
 		var x2 = newlongitude - longitude;
 		var dLon = x2 * Math.PI / 180;
-		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
-				Math.cos(latitude* Math.PI / 180) * Math.cos(newlatitude * Math.PI / 180) 
-				* Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(latitude * Math.PI / 180) * Math.cos(newlatitude * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		var d = R * c;
 		alert(d);
-		
+
 		if (d > 10) {
 			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
 			latitude = newlatitude;
@@ -125,7 +124,7 @@ function post() {
 					alert("OK");
 				else
 					alert("Not OK");
-			});
+			}, "json");
 
 			posting.fail(function() {
 				alert("failed");
@@ -151,7 +150,7 @@ function get() {
 			alert(accessToken);
 			alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 
-			var getting = $.get("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", {
+			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", {
 				fb_uid : response.id,
 				fb_username : response.username,
 				fb_accesstoken : accessToken,
@@ -159,7 +158,7 @@ function get() {
 				lng : longitude,
 			}, function(data) {
 				document.getElementById('shouldLogin').innerHTML = data;
-			});
+			}, "json");
 
 			getting.fail(function() {
 				alert("get failed");
