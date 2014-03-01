@@ -61,7 +61,9 @@ document.addEventListener("deviceready", onDeviceReady, false);
 						alert(JSON.stringify(response.error));
 					} else {
 						var data = document.getElementById('data');
-						data.innerHTML = "Id=" + response.data.id + ", UN=" + response.data.username + ", accessToken=" + accessToken;
+						response.data.forEach(function(item) {
+							data.innerHTML = "Id=" + ritem.id + ", UN=" + item.username + ", accessToken=" + accessToken;
+						});
 					}
 				});
 			} else if (response.status === 'not_authorized') {
