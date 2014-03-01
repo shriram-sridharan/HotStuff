@@ -57,102 +57,27 @@ function onError(error) {
 var accessToken;
 function showRecommend(){
 	document.getElementById('recommend').innerHTML = 
-	"<h3> Hey, <br/> I tried : <input type = 'text' id='what'> </input>" + 
-	"<button class='btn btn-success' onclick='post()'>Chk't Out</button>";
+	"<h4> Friends you should try this, </h4><input type='text' id='what' class='form-control' placeholder='cool stuff'></input><br/>" + 
+	"<a class='btn btn-default' onclick='get()'>Cancel</a> <a class='btn btn-success' onclick='post()'>Chk't Out</a>";
 }
 
 var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
-var recos = '<h4>Yo, check these out:</h4>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
-					<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>';
-					
+
+function showRecos(data){
+	recoHtml = '<h4>Yo, check these out:</h4>';
+	for (var i = 0, len = data.length; i < len; i++) {
+		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
+		recoHtml += data[i].what;
+		recoHtml += '</h3></div><div class="panel-body"><p><strong>';
+		recoHtml += data[i].recommender;
+		recoHtml += '</strong> Distance: <strong>';
+		recoHtml += data[i].distance;
+		recoHtml += '</strong> miles';
+	}
+	document.getElementById('recommend').innerHTML = recoHtml;
+}
+
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
@@ -259,7 +184,8 @@ function get() {
 			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
-				document.getElementById('shouldLogin').innerHTML = data;
+				//document.getElementById('shouldLogin').innerHTML = data;
+				showRecos(data);
 			});
 
 			getting.fail(function() {
