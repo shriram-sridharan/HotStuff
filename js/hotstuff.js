@@ -76,10 +76,12 @@ function showRecos(jsonstring){
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
 		recoHtml += data[i].what;
 		recoHtml += '</h3></div><div class="panel-body"><p><strong>';
+		recoHtml += data[i].placename;
+		recoHtml += '</strong><br/> Suggested by, <strong>';
 		recoHtml += data[i].recommender;
-		recoHtml += '</strong><br/> Distance: <strong>';
+		recoHtml += '</strong><br/> <strong>';
 		recoHtml += data[i].distance.toFixed(2);
-		recoHtml += '</strong> miles</p></div></div>';
+		recoHtml += '</strong> meters away</p></div></div>';
 	}
 	document.getElementById('recommend').innerHTML = recoHtml;
 }
