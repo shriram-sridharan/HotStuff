@@ -61,15 +61,105 @@ function showRecommend(){
 	"<button class='btn btn-success' onclick='post()'>Chk't Out</button>";
 }
 
-var headerWithButton = "<h1>Chk't Out</h1><button onclick='showRecommend()'>Rec</button>";
+var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
+var recos = '<h4>Yo, check these out:</h4>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>';
+					
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
 			document.getElementById('header').innerHTML = headerWithButton;
-		} else if (response.status === 'not_authorized') {
+			ocument.getElementById('recommend').innerHTML = recos;
 			alert('Not logged in');
 			document.getElementById('header').innerHTML = header;
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
