@@ -67,6 +67,7 @@ var header = "<h1>Chk't Out</h1>";
 function showRecos(data){
 	alert("in show recos");
 	alert(data);
+	alert(data[0].what);
 	recoHtml = '<h4>Yo, check these out:</h4>';
 	for (i=0; i<data.length;i++) {
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
