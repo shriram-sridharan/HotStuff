@@ -120,9 +120,7 @@ function post() {
 				lat : latitude,
 				lng : longitude,
 				what : $("#what").val()
-			});
-
-			posting.done(function(data) {
+			}, function(data) {
 				if ("OK".equals(data))
 					alert("OK");
 				else
@@ -159,9 +157,7 @@ function get() {
 				fb_accesstoken : accessToken,
 				lat : latitude,
 				lng : longitude,
-			});
-
-			getting.done(function(data) {
+			}, function(data) {
 				document.getElementById('shouldLogin').innerHTML = data;
 			});
 
