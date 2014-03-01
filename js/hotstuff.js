@@ -158,8 +158,9 @@ function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
+			alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
-			document.getElementById('recommend').innerHTML = recos;
+			document.getElementById('recommend').innerHTML = "recos";
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
@@ -185,10 +186,10 @@ function getloc() {
 		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(latitude * Math.PI / 180) * Math.cos(newlatitude * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		var d = R * c;
-		// alert(d);
+		alert(d);
 
 		if (d > 10) {
-			// alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
 			latitude = newlatitude;
 			longitude = newlongitude;
 			get();
@@ -301,13 +302,14 @@ function login() {
 document.addEventListener('deviceready', function() {
 	try {
 		document.getElementById('data').innerHTML = "Device Ready";
-		// alert('Device is ready! Getting GeoLocation.');
-		window.setInterval(getloc, 10000);
+		alert('Device is ready! Getting GeoLocation.');
+		window.setInterval(getloc, 3000);
 		FB.init({
 			appId : "346598232144666",
 			nativeInterface : CDV.FB,
 			useCachedDialogs : false
 		});
+		alert('FB init done');
 		document.getElementById('data').innerHTML = "";
 		getLoginStatus();
 	} catch (e) {
