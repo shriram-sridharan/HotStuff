@@ -56,9 +56,10 @@ function onError(error) {
 
 var accessToken;
 function showRecommend(){
-	document.getElementById('recommend').innerHTML = 
-	"<h4> Friends you should try this, </h4><input type='text' id='what' class='form-control' placeholder='cool stuff'></input><br/>" + 
-	"<a class='btn btn-default' onClick='get()'>Cancel</a> <a class='btn btn-success' onClick='post()'>Chk't Out</a>";
+	htmlText = "";
+	htmlText += "<input type='text' id='what' class='form-control' placeholder='cool stuff'></input><br/>";
+	htmlText += "<a class='btn btn-success' onclick='post()'>Chk't Out</a>";
+	return htmlText;
 }
 
 var headerWithButton = '';
@@ -75,8 +76,8 @@ function showRecos(jsonstring){
 		recoHtml += data[i].what;
 		recoHtml += '</h3></div><div class="panel-body"><p><strong>';
 		recoHtml += data[i].recommender;
-		recoHtml += '</strong> Distance: <strong>';
-		recoHtml += data[i].distance;
+		recoHtml += '</strong><br/> Distance: <strong>';
+		recoHtml += data[i].distance.toFixed(2);
 		recoHtml += '</strong> miles</p></div></div>';
 	}
 	document.getElementById('recommend').innerHTML = recoHtml;
@@ -90,10 +91,13 @@ function getLoginStatus() {
 			alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
 			//get();
+			document.getElementById('postReco').innerHTML = showRecommend();
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
-			document.getElementById('shouldLogin').innerHTML = "<button onClick='login()'>Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
+			document.getElementById('recommend').innerHTML = "";
+			document.getElementById('postReco').innerHTML = "";
 		} else {
 			alert("Not connected to FB at all.");
 		}
@@ -207,8 +211,9 @@ function get() {
 
 function logout() {
 	FB.logout(function(response) {
-		alert('logged out');
+		alert('You have Logged Out');
 	});
+	getLoginStatus();
 }
 
 function login() {
