@@ -5,7 +5,7 @@ function onDeviceReady() {
 	document.addEventListener("pause", onPause, false);
 	document.addEventListener("resume", onResume, false);
 
-	alert("Device is Ready");
+	// alert("Device is Ready");
 
 }
 
@@ -62,7 +62,7 @@ function getLoginStatus() {
 			accessToken = response.authResponse.accessToken;
 			document.getElementById('recommend').innerHTML = "<input type = 'text' id='what'> </input> <button onclick='post()'>Recommend</button>";
 		} else if (response.status === 'not_authorized') {
-			alert('not logged in');
+			alert('Not logged in');
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
 		} else {
 			alert("Not connected to FB at all.");
@@ -85,10 +85,10 @@ function getloc() {
 		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(latitude * Math.PI / 180) * Math.cos(newlatitude * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		var d = R * c;
-		alert(d);
+		// alert(d);
 
 		if (d > 10) {
-			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			// alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
 			latitude = newlatitude;
 			longitude = newlongitude;
 			get();
@@ -105,12 +105,12 @@ function post() {
 		if (response.error) {
 			alert(JSON.stringify(response.error));
 		} else {
-			alert(response.id);
-			alert(response.username);
-			alert(accessToken);
-
-			alert('Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
-			alert($("#what").val());
+			// alert(response.id);
+			// alert(response.username);
+			// alert(accessToken);
+// 
+			// alert('Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
+			// alert($("#what").val());
 			var jsoninput = {};
 			jsoninput.fb_uid = response.id;
 			jsoninput.fb_username = response.username;
@@ -118,14 +118,12 @@ function post() {
 			jsoninput.lat = ''+latitude;
 			jsoninput.lng = ''+longitude;
 			jsoninput.what = $("#what").val();
-			alert(JSON.stringify(jsoninput, "", ""));
+			// alert(JSON.stringify(jsoninput, "", ""));
 			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
-				if ("OK".equals(data))
-					alert("OK");
-				else
-					alert("Not OK");
+				if (data != "OK")
+					alert("Recommendation Not Successful. Please try again later!");
 			});
 
 			posting.fail(function() {
@@ -136,7 +134,6 @@ function post() {
 				alert("finished");
 			});
 		}
-		alert("Coming here 2");
 	});
 }
 
@@ -147,17 +144,17 @@ function get() {
 		if (response.error) {
 			alert(JSON.stringify(response.error));
 		} else {
-			alert(response.id);
-			alert(response.username);
-			alert(accessToken);
-			alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
+			// alert(response.id);
+			// alert(response.username);
+			// alert(accessToken);
+			// alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 			var jsoninput = {};
 			jsoninput.fb_uid = response.id;
 			jsoninput.fb_username = response.username;
 			jsoninput.fb_accesstoken = accessToken;
 			jsoninput.lat = ''+latitude;
 			jsoninput.lng = ''+longitude;
-			alert(JSON.stringify(jsoninput, "", ""));
+			// alert(JSON.stringify(jsoninput, "", ""));
 			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
@@ -172,7 +169,7 @@ function get() {
 				alert("get finished");
 			});
 		}
-		alert("Coming here Get");
+		// alert("Coming here Get");
 	});
 }
 
@@ -204,7 +201,7 @@ function login() {
 document.addEventListener('deviceready', function() {
 	try {
 		document.getElementById('data').innerHTML = "Device Ready";
-		alert('Device is ready! Getting GeoLocation.');
+		// alert('Device is ready! Getting GeoLocation.');
 		window.setInterval(getloc, 10000);
 		FB.init({
 			appId : "346598232144666",
