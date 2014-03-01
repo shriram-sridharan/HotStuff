@@ -66,6 +66,7 @@ var header = "<h1>Chk't Out</h1>";
 
 function showRecos(data){
 	alert("in show recos");
+	alert(data);
 	recoHtml = '<h4>Yo, check these out:</h4>';
 	for (var i in data) {
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
@@ -86,7 +87,7 @@ function getLoginStatus() {
 			accessToken = response.authResponse.accessToken;
 			alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
-			get();
+			//get();
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
