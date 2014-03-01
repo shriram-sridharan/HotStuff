@@ -9,12 +9,13 @@
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 		<!--<script type="text/javascript" charset="utf-8" src="cordova/cordova.js"></script>-->
-		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<!-- cordova facebook plugin -->
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script src="js/cdv-plugin-fb-connect.js"></script>
 		<!-- facebook js sdk -->
 		<script src="js/facebook-js-sdk.js"></script>
 		<script src="js/hotstuff.js"></script>
+		
 	</head>
 	<body>
 
@@ -29,9 +30,8 @@
 			<!-- Content    -->
 			<div data-role="content">
 				<h3>Content</h3>
-				<button onclick="login()">
-					Login Using Facebook
-				</button>
+				<div id="shouldLogin"></div>
+				
 				
 				<div id="data">
 					Initializing app...

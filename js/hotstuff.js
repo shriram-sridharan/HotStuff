@@ -16,6 +16,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 	//What to do when resumed
 	function onResume() {
+		getLoginStatus();
 		alert("resume");
 	}
 
@@ -49,9 +50,17 @@ document.addEventListener("deviceready", onDeviceReady, false);
 	function getLoginStatus() {
 		FB.getLoginStatus(function(response) {
 			if (response.status == 'connected') {
-				alert('logged in');
-			} else {
+				alert('You are Already connected');
+				var uid = response.authResponse.userID;
+    			var accessToken = response.authResponse.accessToken;
+    			alert(uid);
+    			alert(accessToken);
+			} else if (response.status === 'not_authorized') {
 				alert('not logged in');
+				document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
+			}
+			else {
+				alert("Not connected to FB at all.");
 			}
 		});
 	}
@@ -69,7 +78,9 @@ document.addEventListener("deviceready", onDeviceReady, false);
 				nativeInterface : CDV.FB,
 				useCachedDialogs : false
 			});
+			
 		FB.login(function(response) {
+			
 			if (response.session) {
 				alert('logged in');
 			} else {
@@ -89,6 +100,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 				nativeInterface : CDV.FB,
 				useCachedDialogs : false
 			});
+			getLoginStatus();
 			document.getElementById('data').innerHTML = "";
 		} catch (e) {
 			alert(e);
