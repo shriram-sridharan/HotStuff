@@ -63,15 +63,7 @@ function showRecommend(){
 
 var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
-var recos = "<h4>Yo, check these out:</h4>";
-					/*<div class="panel panel-default">\
-						<div class="panel-heading">\
-							<h3 class="panel-title">Panel title</h3>\
-						</div>\
-						<div class="panel-body">\
-							Panel content\
-						</div>\
-					</div>\
+var recos = '<h4>Yo, check these out:</h4>\
 					<div class="panel panel-default">\
 						<div class="panel-heading">\
 							<h3 class="panel-title">Panel title</h3>\
@@ -151,7 +143,15 @@ var recos = "<h4>Yo, check these out:</h4>";
 						<div class="panel-body">\
 							Panel content\
 						</div>\
-					</div>';*/
+					</div>\
+					<div class="panel panel-default">\
+						<div class="panel-heading">\
+							<h3 class="panel-title">Panel title</h3>\
+						</div>\
+						<div class="panel-body">\
+							Panel content\
+						</div>\
+					</div>';
 					
 
 function getLoginStatus() {
@@ -160,7 +160,7 @@ function getLoginStatus() {
 			accessToken = response.authResponse.accessToken;
 			alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
-			document.getElementById('recommend').innerHTML = "recos";
+			document.getElementById('recommend').innerHTML = recos;
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
