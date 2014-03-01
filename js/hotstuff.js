@@ -54,6 +54,7 @@ function onError(error) {
 	alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 }
 
+var ranOnce = false;
 var accessToken;
 function showRecommend(){
 	htmlText = "<div class='input-group'>";
@@ -83,7 +84,6 @@ function showRecos(jsonstring){
 	document.getElementById('recommend').innerHTML = recoHtml;
 }
 
-
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
@@ -91,6 +91,8 @@ function getLoginStatus() {
 			alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
 			//get();
+			ranOnce = false;
+			document.getElementById('shouldLogin').innerHTML = "";
 			document.getElementById('postReco').innerHTML = showRecommend();
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
@@ -125,11 +127,12 @@ function getloc() {
 		var d = R * c;
 		alert(d);
 
-		if (d > 10) {
+		if (d > 10 || !ranOnce) {
 			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
 			latitude = newlatitude;
 			longitude = newlongitude;
 			get();
+			ranOnce = true;
 		}
 	}, onError, {
 		maximumAge : 3000
@@ -228,16 +231,16 @@ function login() {
 	});
 
 	FB.login(function(response) {
-
-		if (response.session) {
-			alert('logged in');
-		} else {
-			alert('not logged in');
-		}
+		// if (response.session) {
+			// alert('logged in');
+		// } else {
+			// alert('not logged in');
+		// }
+		getLoginStatus();
 	}, {
 		scope : "email"
 	});
-	getLoginStatus();
+	
 }
 
 document.addEventListener('deviceready', function() {
