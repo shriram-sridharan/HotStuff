@@ -44,69 +44,23 @@ FB.Event.subscribe('auth.statusChange', function(response) {
 });
 
 /*function getSession() {
- alert("session: " + JSON.stringify(FB.getSession()));
- }
- */
-
-var onSuccess = function(position) {
-    alert('Latitude: '          + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + new Date(position.timestamp)      + '\n');
-};
+alert("session: " + JSON.stringify(FB.getSession()));
+}
+*/
 
 // onError Callback receives a PositionError object
 //
 function onError(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
+	alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 }
+
+var accessToken;
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
-			var uid = response.authResponse.userID;
-			var accessToken = response.authResponse.accessToken;
-			FB.api('/me', {
-				fields : 'id, username'
-			}, function(response) {
-				if (response.error) {
-					alert(JSON.stringify(response.error));
-				} else {
-					alert(response.id);
-					alert(response.username); 
-					alert(accessToken);
-					navigator.geolocation.getCurrentPosition(onSuccess, onError);
-					var posting = $.post("url", {
-						fb_uid : response.id,
-						fb_username : response.username,
-						fb_accesstoken : accessToken,
-						lat : "46.00004",
-						lng : "-85.000005",
-						what : "shriram is hacking!"
-					});
-					
-					posting.done(function( data ) {
-					    if("OK".equals(data))
-					    	alert("OK");
-					    else
-					    	alert("Not OK");
-					});
-					
-					posting.fail(function() {
-   						 alert( "failed" );
-					});
-					
-					posting.always(function() {
-   						 alert( "finished" );
-					});
-				}
-				alert("Coming here 2");
-			});
+			accessToken = response.authResponse.accessToken;
+			document.getElementById('shouldLogin').innerHTML = "<input type = 'text' id='what'> </input> <button onclick='post()'>Recommend</button>";
 		} else if (response.status === 'not_authorized') {
 			alert('not logged in');
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
@@ -115,6 +69,57 @@ function getLoginStatus() {
 		}
 	});
 }
+
+
+function post() {
+	FB.api('/me', {
+		fields : 'id, username'
+	}, function(response) {
+		if (response.error) {
+			alert(JSON.stringify(response.error));
+		} else {
+			alert(response.id);
+			alert(response.username);
+			alert(accessToken);
+
+			var latitude = 0, longitude = 0;
+
+			navigator.geolocation.getCurrentPosition(function(position) {
+				latitude = position.coords.latitude;
+				longitude = position.coords.longitude;
+				alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			}, onError);
+
+			alert($('what'));
+
+			var posting = $.post("url", {
+				fb_uid : response.id,
+				fb_username : response.username,
+				fb_accesstoken : accessToken,
+				lat : latitude,
+				lng : longitude,
+				what : $('#what')
+			});
+
+			posting.done(function(data) {
+				if ("OK".equals(data))
+					alert("OK");
+				else
+					alert("Not OK");
+			});
+
+			posting.fail(function() {
+				alert("failed");
+			});
+
+			posting.always(function() {
+				alert("finished");
+			});
+		}
+		alert("Coming here 2");
+	});
+}
+
 
 function logout() {
 	FB.logout(function(response) {
