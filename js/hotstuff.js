@@ -62,6 +62,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 					} else {
 						var data = document.getElementById('data');
 						alert("Coming here");
+						alert(response.data.id);
+						alert(response.data.username);
 						response.data.forEach(function(item) {
 							data.innerHTML = "Id=" + item.id + ", UN=" + item.username + ", accessToken=" + accessToken;
 						});
