@@ -9,7 +9,7 @@
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 		<!--<script type="text/javascript" charset="utf-8" src="cordova/cordova.js"></script>-->
-		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<!-- cordova facebook plugin -->
 		<script src="js/cdv-plugin-fb-connect.js"></script>
 		<!-- facebook js sdk -->
@@ -71,8 +71,10 @@
 	document.addEventListener("deviceready", onDeviceReady, false);
 
 	function onDeviceReady() {
+		document.getElementById('data').innerHTML = "Device Ready";
 		document.addEventListener("pause", onPause, false);
 		document.addEventListener("resume", onResume, false);
+		
 		alert("Device is Ready");
 
 	}
@@ -163,6 +165,11 @@
 	}
 
 	function login() {
+		FB.init({
+				appId : "346598232144666",
+				nativeInterface : CDV.FB,
+				useCachedDialogs : false
+			});
 		FB.login(function(response) {
 			if (response.session) {
 				alert('logged in');
@@ -217,9 +224,10 @@
 
 	document.addEventListener('deviceready', function() {
 		try {
+			document.getElementById('data').innerHTML = "Device Ready";
 			alert('Device is ready! Make sure you set your app_id below this alert.');
 			FB.init({
-				appId : "396208080524178",
+				appId : "346598232144666",
 				nativeInterface : CDV.FB,
 				useCachedDialogs : false
 			});
