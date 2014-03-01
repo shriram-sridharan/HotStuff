@@ -61,10 +61,12 @@ document.addEventListener("deviceready", onDeviceReady, false);
 						alert(JSON.stringify(response.error));
 					} else {
 						var data = document.getElementById('data');
+						alert("Coming here");
 						response.data.forEach(function(item) {
 							data.innerHTML = "Id=" + item.id + ", UN=" + item.username + ", accessToken=" + accessToken;
 						});
 					}
+					alert("Coming here 2");
 				});
 			} else if (response.status === 'not_authorized') {
 				alert('not logged in');
