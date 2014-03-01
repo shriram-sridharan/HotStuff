@@ -70,18 +70,32 @@ function getLoginStatus() {
 	});
 }
 
-var latitude=0, longitude=0;
+Number.prototype.toRad = function() {
+   return this * Math.PI / 180;
+};
+
+var latitude = 0, longitude = 0;
 function getloc() {
 	navigator.geolocation.getCurrentPosition(function(position) {
 		newlatitude = position.coords.latitude;
 		newlongitude = position.coords.longitude;
-		if(newlatitude!=latitude || newlongitude!=longitude)
-			{
-				alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
-				latitude = newlatitude;
-				longitude = newlongitude;
-				get();
-			}
+		
+		var R = 6371; // km
+		var x1 = newlatitude - latitude;
+		var dLat = x1.toRad();
+		var x2 = newlongitude - longitude;
+		var dLon = x2.toRad();
+		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		var d = R * c;
+		alert(d);
+		
+		if (d > 30) {
+			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			latitude = newlatitude;
+			longitude = newlongitude;
+			get();
+		}
 	}, onError, {
 		maximumAge : 3000
 	});
@@ -150,7 +164,7 @@ function get() {
 			});
 
 			getting.done(function(data) {
-				document.getElementById('shouldLogin').innerHTML=data;
+				document.getElementById('shouldLogin').innerHTML = data;
 			});
 
 			getting.fail(function() {
