@@ -97,14 +97,14 @@ function getLoginStatus() {
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
-			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><button class='btn btn-primary' btn-lg btn-block' onclick='login()'> <span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><br/><br/><br/><br/><br/><br/><button class='btn btn-primary' btn-lg btn-block' onclick='login()'> <span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
 		} else {
 			alert("Not connected to FB");
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
-			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><button class='btn btn-primary btn-lg btn-block' onclick='login()'><span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><br/><br/><br/><br/><br/><br/><button class='btn btn-primary btn-lg btn-block' onclick='login()'><span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
 			
 		}
 	});
@@ -167,7 +167,7 @@ function post() {
 					alert("Recommendation Not Successful. Please try again later!");
 				} else {
 					alert("Recommended!");
-					document.getElementById('what').val("");
+					document.getElementById('what').value = "";
 				}
 			});
 
