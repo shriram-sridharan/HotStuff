@@ -71,13 +71,15 @@ function getLoginStatus() {
 }
 
 var latitude, longitude;
-navigator.geolocation.getCurrentPosition(function(position) {
-	latitude = position.coords.latitude;
-	longitude = position.coords.longitude;
-	alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
-}, onError, {
-	maximumAge : 3000
-});
+function getloc() {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		latitude = position.coords.latitude;
+		longitude = position.coords.longitude;
+		alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+	}, onError, {
+		maximumAge : 3000
+	});
+}
 
 function post() {
 	FB.api('/me', {
@@ -149,7 +151,8 @@ function login() {
 document.addEventListener('deviceready', function() {
 	try {
 		document.getElementById('data').innerHTML = "Device Ready";
-		alert('Device is ready! Make sure you set your app_id below this alert.');
+		alert('Device is ready! Getting GeoLocation.');
+		window.setInterval(getloc, 10000);
 		FB.init({
 			appId : "346598232144666",
 			nativeInterface : CDV.FB,
