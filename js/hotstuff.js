@@ -63,8 +63,8 @@ function showRecommend(){
 
 var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
-var recos = '<h4>Yo, check these out:</h4>\
-					<div class="panel panel-default">\
+var recos = "<h4>Yo, check these out:</h4>";
+					/*<div class="panel panel-default">\
 						<div class="panel-heading">\
 							<h3 class="panel-title">Panel title</h3>\
 						</div>\
@@ -151,18 +151,18 @@ var recos = '<h4>Yo, check these out:</h4>\
 						<div class="panel-body">\
 							Panel content\
 						</div>\
-					</div>';
+					</div>';*/
 					
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
-			document.getElementById('header').innerHTML = headerWithButton;
+			//document.getElementById('header').innerHTML = headerWithButton;
 			document.getElementById('recommend').innerHTML = recos;
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
-			document.getElementById('header').innerHTML = header;
+			//document.getElementById('header').innerHTML = header;
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
 		} else {
 			alert("Not connected to FB at all.");
