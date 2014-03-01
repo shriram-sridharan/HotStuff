@@ -90,7 +90,7 @@ function post() {
 			alert(response.username);
 			alert(accessToken);
 
-			alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			alert('Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 			alert($('what').text);
 
 			var posting = $.post("url", {
