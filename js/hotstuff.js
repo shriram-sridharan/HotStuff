@@ -28,7 +28,7 @@ if ( typeof FB == 'undefined')
 	alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
 FB.Event.subscribe('auth.login', function(response) {
-	alert('auth.login event');
+	// alert('auth.login event');
 });
 
 FB.Event.subscribe('auth.logout', function(response) {
@@ -40,7 +40,7 @@ FB.Event.subscribe('auth.sessionChange', function(response) {
 });
 
 FB.Event.subscribe('auth.statusChange', function(response) {
-	alert('auth.statusChange event');
+	// alert('auth.statusChange event');
 });
 
 /*function getSession() {
@@ -55,14 +55,16 @@ function onError(error) {
 }
 
 var accessToken;
+var headerWithButton = "<h1>Chk't Out</h1><button onclick='#post'></button>";
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
-			document.getElementById('recommend').innerHTML = "<input type = 'text' id='what'> </input> <button onclick='post()'>Recommend</button>";
+			document.getElementById('recommend').innerHTML = "<input type = 'text' id='what'> </input> <button class='btn btn-success' onclick='post()'>Recommend</button>";
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
+			
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
 		} else {
 			alert("Not connected to FB at all.");
@@ -131,7 +133,7 @@ function post() {
 			});
 
 			posting.always(function() {
-				alert("finished");
+				// alert("finished");
 			});
 		}
 	});
@@ -166,7 +168,7 @@ function get() {
 			});
 
 			getting.always(function() {
-				alert("get finished");
+				// alert("get finished");
 			});
 		}
 		// alert("Coming here Get");
