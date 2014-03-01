@@ -113,7 +113,7 @@ function post() {
 			alert('Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 			alert($("#what").val());
 
-			var posting = $.post(" ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", {
+			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", {
 				fb_uid : response.id,
 				fb_username : response.username,
 				fb_accesstoken : accessToken,
@@ -153,7 +153,7 @@ function get() {
 			alert(accessToken);
 			alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 
-			var getting = $.get(" ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", {
+			var getting = $.get("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", {
 				fb_uid : response.id,
 				fb_username : response.username,
 				fb_accesstoken : accessToken,
