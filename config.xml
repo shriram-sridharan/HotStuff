@@ -1,0 +1,4 @@
+<gap:plugin name="com.phonegap.plugins.facebookconnect">
+    <param name="APP_ID" value="396208080524178" />
+    <param name="APP_NAME" value="LearnByte" />
+</gap:plugin>
