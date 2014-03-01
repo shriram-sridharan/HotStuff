@@ -58,7 +58,7 @@ var accessToken;
 function showRecommend(){
 	document.getElementById('recommend').innerHTML = 
 	"<h4> Friends you should try this, </h4><input type='text' id='what' class='form-control' placeholder='cool stuff'></input><br/>" + 
-	"<a class='btn btn-default' onclick='get()'>Cancel</a> <a class='btn btn-success' onclick='post()'>Chk't Out</a>";
+	"<a class='btn btn-default' onClick='get()'>Cancel</a> <a class='btn btn-success' onClick='post()'>Chk't Out</a>";
 }
 
 var headerWithButton = '';
@@ -91,7 +91,7 @@ function getLoginStatus() {
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
-			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<button onClick='login()'>Login Using Facebook</button>";
 		} else {
 			alert("Not connected to FB at all.");
 		}
