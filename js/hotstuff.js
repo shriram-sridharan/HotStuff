@@ -60,7 +60,7 @@ function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
-			document.getElementById('shouldLogin').innerHTML = "<input type = 'text' id='what'> </input> <button onclick='post()'>Recommend</button>";
+			document.getElementById('recommend').innerHTML = "<input type = 'text' id='what'> </input> <button onclick='post()'>Recommend</button>";
 		} else if (response.status === 'not_authorized') {
 			alert('not logged in');
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
@@ -70,12 +70,18 @@ function getLoginStatus() {
 	});
 }
 
-var latitude, longitude;
+var latitude=0, longitude=0;
 function getloc() {
 	navigator.geolocation.getCurrentPosition(function(position) {
-		latitude = position.coords.latitude;
-		longitude = position.coords.longitude;
-		alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+		newlatitude = position.coords.latitude;
+		newlongitude = position.coords.longitude;
+		if(newlatitude!=latitude || newlongitude!=longitude)
+			{
+				alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+				latitude = newlatitude;
+				longitude = newlongitude;
+				get();
+			}
 	}, onError, {
 		maximumAge : 3000
 	});
@@ -93,7 +99,7 @@ function post() {
 			alert(accessToken);
 
 			alert('Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
-			alert($('what').text);
+			alert($("#what").val());
 
 			var posting = $.post("url", {
 				fb_uid : response.id,
@@ -101,7 +107,7 @@ function post() {
 				fb_accesstoken : accessToken,
 				lat : latitude,
 				lng : longitude,
-				what : $('#what').text
+				what : $("#what").val()
 			});
 
 			posting.done(function(data) {
@@ -120,6 +126,42 @@ function post() {
 			});
 		}
 		alert("Coming here 2");
+	});
+}
+
+function get() {
+	FB.api('/me', {
+		fields : 'id, username'
+	}, function(response) {
+		if (response.error) {
+			alert(JSON.stringify(response.error));
+		} else {
+			alert(response.id);
+			alert(response.username);
+			alert(accessToken);
+			alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
+
+			var getting = $.get("url", {
+				fb_uid : response.id,
+				fb_username : response.username,
+				fb_accesstoken : accessToken,
+				lat : latitude,
+				lng : longitude,
+			});
+
+			getting.done(function(data) {
+				document.getElementById('shouldLogin').innerHTML=data;
+			});
+
+			getting.fail(function() {
+				alert("get failed");
+			});
+
+			getting.always(function() {
+				alert("get finished");
+			});
+		}
+		alert("Coming here Get");
 	});
 }
 
@@ -158,8 +200,8 @@ document.addEventListener('deviceready', function() {
 			nativeInterface : CDV.FB,
 			useCachedDialogs : false
 		});
-		getLoginStatus();
 		document.getElementById('data').innerHTML = "";
+		getLoginStatus();
 	} catch (e) {
 		alert(e);
 	}
