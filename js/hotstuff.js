@@ -55,16 +55,23 @@ function onError(error) {
 }
 
 var accessToken;
-var headerWithButton = "<h1>Chk't Out</h1><button onclick='#post'></button>";
+function showRecommend(){
+	document.getElementById('recommend').innerHTML = 
+	"<h3> Hey, <br/> I tried : <input type = 'text' id='what'> </input>" + 
+	"<button class='btn btn-success' onclick='post()'>Chk't Out</button>";
+}
+
+var headerWithButton = "<h1>Chk't Out</h1><button onclick='showRecommend()'>Rec</button>";
+var header = "<h1>Chk't Out</h1>";
 
 function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
-			document.getElementById('recommend').innerHTML = "<input type = 'text' id='what'> </input> <button class='btn btn-success' onclick='post()'>Recommend</button>";
+			document.getElementById('header').innerHTML = headerWithButton;
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
-			
+			document.getElementById('header').innerHTML = header;
 			document.getElementById('shouldLogin').innerHTML = "<button onclick='login()'>Login Using Facebook</button>";
 		} else {
 			alert("Not connected to FB at all.");
