@@ -68,7 +68,7 @@ function showRecos(data){
 	alert("in show recos");
 	alert(data);
 	recoHtml = '<h4>Yo, check these out:</h4>';
-	for (var i in data) {
+	for (i=0; i<data.length;i++) {
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
 		recoHtml += data[i].what;
 		recoHtml += '</h3></div><div class="panel-body"><p><strong>';
