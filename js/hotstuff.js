@@ -119,7 +119,7 @@ function post() {
 			jsoninput.lng = ''+longitude;
 			jsoninput.what = $("#what").val();
 			alert(JSON.stringify(jsoninput, "", ""));
-			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post/", 
+			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
 				if ("OK".equals(data))
@@ -158,7 +158,7 @@ function get() {
 			jsoninput.lat = ''+latitude;
 			jsoninput.lng = ''+longitude;
 			alert(JSON.stringify(jsoninput, "", ""));
-			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos/", 
+			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
 				document.getElementById('shouldLogin').innerHTML = data;
