@@ -100,9 +100,10 @@ function getLoginStatus() {
 			document.getElementById('postReco').innerHTML = "";
 		} else {
 			alert("Not connected to FB");
-			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
+			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
+			
 		}
 	});
 }
@@ -236,13 +237,14 @@ function login() {
 	}, {
 		scope : "email"
 	});
+	getLoginStatus();
 }
 
 document.addEventListener('deviceready', function() {
 	try {
 		document.getElementById('data').innerHTML = "Device Ready";
 		alert('Device is ready! Getting GeoLocation.');
-		window.setInterval(getloc, 3000);
+		
 		FB.init({
 			appId : "346598232144666",
 			nativeInterface : CDV.FB,
@@ -251,6 +253,7 @@ document.addEventListener('deviceready', function() {
 		alert('FB init done');
 		document.getElementById('data').innerHTML = "";
 		getLoginStatus();
+		window.setInterval(getloc, 10000);
 	} catch (e) {
 		alert(e);
 	}
