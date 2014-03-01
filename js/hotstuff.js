@@ -56,9 +56,9 @@ function onError(error) {
 
 var accessToken;
 function showRecommend(){
-	htmlText = "";
-	htmlText += "<input type='text' id='what' class='form-control' placeholder='cool stuff'></input><br/>";
-	htmlText += "<a class='btn btn-success' onclick='post()'>Chk't Out</a>";
+	htmlText = "<div class='input-group'>";
+	htmlText += "<input type='text' id='what' class='form-control' placeholder='cool stuff'></input>";
+	htmlText += "<span class='input-group-btn'><button class='btn btn-success' type='button' onclick='post()'><span class='glyphicon glyphicon-ok'></span></button></span></div>";
 	return htmlText;
 }
 
@@ -99,7 +99,10 @@ function getLoginStatus() {
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
 		} else {
-			alert("Not connected to FB at all.");
+			alert("Not connected to FB");
+			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
+			document.getElementById('recommend').innerHTML = "";
+			document.getElementById('postReco').innerHTML = "";
 		}
 	});
 }
