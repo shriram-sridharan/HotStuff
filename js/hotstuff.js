@@ -113,12 +113,12 @@ function post() {
 			alert($("#what").val());
 
 			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", {
-				fb_uid : response.id,
-				fb_username : response.username,
-				fb_accesstoken : accessToken,
-				lat : latitude,
-				lng : longitude,
-				what : $("#what").val()
+				\"fb_uid\" : response.id,
+				\"fb_username\" : response.username,
+				\"fb_accesstoken\" : accessToken,
+				\"lat\" : latitude,
+				\"lng\" : longitude,
+				\"what\" : $("#what").val()
 			}, function(data) {
 				if ("OK".equals(data))
 					alert("OK");
@@ -151,11 +151,11 @@ function get() {
 			alert('Get Latitude: ' + latitude + '\n' + 'Longitude: ' + longitude + '\n');
 
 			var getting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/get-recos", {
-				fb_uid : response.id,
-				fb_username : response.username,
-				fb_accesstoken : accessToken,
-				lat : latitude,
-				lng : longitude,
+				\"fb_uid\" : response.id,
+				\"fb_username\" : response.username,
+				\"fb_accesstoken\" : accessToken,
+				\"lat\" : latitude,
+				\"lng\" : longitude,
 			}, function(data) {
 				document.getElementById('shouldLogin').innerHTML = data;
 			}, "json");
