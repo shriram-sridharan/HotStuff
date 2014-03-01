@@ -11,13 +11,13 @@ function onDeviceReady() {
 
 //What to do when paused
 function onPause() {
-	alert("paused!");
+	//alert("paused!");
 }
 
 //What to do when resumed
 function onResume() {
 	// getLoginStatus();
-	alert("resume");
+	//alert("resume");
 }
 
 if (( typeof cordova == 'undefined') && ( typeof Cordova == 'undefined'))
@@ -67,10 +67,10 @@ var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
 
 function showRecos(jsonstring){
-	alert("in show recos");
-	alert(jsonstring);
+	//alert("in show recos");
+	//alert(jsonstring);
 	var data = JSON.parse(jsonstring);
-	alert(data[0].what);
+	//alert(data[0].what);
 	recoHtml = '<h4>Yo, check these out:</h4>';
 	for (i=0; i<data.length;i++) {
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
@@ -88,7 +88,7 @@ function getLoginStatus() {
 	FB.getLoginStatus(function(response) {
 		if (response.status == 'connected') {
 			accessToken = response.authResponse.accessToken;
-			alert(accessToken);
+			//alert(accessToken);
 			//document.getElementById('header').innerHTML = headerWithButton;
 			//get();
 			ranOnce = false;
@@ -97,14 +97,14 @@ function getLoginStatus() {
 		} else if (response.status === 'not_authorized') {
 			alert('Not logged in');
 			//document.getElementById('header').innerHTML = header;
-			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><button class='btn btn-primary' btn-lg btn-block' onclick='login()'> <span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
 		} else {
 			alert("Not connected to FB");
 			document.getElementById('recommend').innerHTML = "";
 			document.getElementById('postReco').innerHTML = "";
-			document.getElementById('shouldLogin').innerHTML = "<button class='btn btn-primary' onclick='login()'>Login Using Facebook</button>";
+			document.getElementById('shouldLogin').innerHTML = "<br/><br/><br/><button class='btn btn-primary btn-lg btn-block' onclick='login()'><span class='glyphicon glyphicon-user'></span> Login Using Facebook</button>";
 			
 		}
 	});
@@ -125,10 +125,10 @@ function getloc() {
 		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(latitude * Math.PI / 180) * Math.cos(newlatitude * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		var d = R * c;
-		alert(d);
+		//alert(d);
 
 		if (d > 10 || !ranOnce) {
-			alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			//alert('New Position = Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
 			latitude = newlatitude;
 			longitude = newlongitude;
 			get();
@@ -163,8 +163,12 @@ function post() {
 			var posting = $.post("http://ec2-54-201-190-159.us-west-2.compute.amazonaws.com/reco-post", 
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
-				if (data != "OK")
+				if (data != "OK") {
 					alert("Recommendation Not Successful. Please try again later!");
+				} else {
+					alert("Recommended!");
+					document.getElementById('what').val("");
+				}
 			});
 
 			posting.fail(function() {
@@ -200,7 +204,7 @@ function get() {
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
 				//document.getElementById('shouldLogin').innerHTML = data;
-				alert("calling show recos");
+				//alert("calling show recos");
 				showRecos(data);
 			});
 
@@ -246,14 +250,14 @@ function login() {
 document.addEventListener('deviceready', function() {
 	try {
 		document.getElementById('data').innerHTML = "Device Ready";
-		alert('Device is ready! Getting GeoLocation.');
+		//alert('Device is ready! Getting GeoLocation.');
 		
 		FB.init({
 			appId : "346598232144666",
 			nativeInterface : CDV.FB,
 			useCachedDialogs : false
 		});
-		alert('FB init done');
+		//alert('FB init done');
 		document.getElementById('data').innerHTML = "";
 		getLoginStatus();
 		window.setInterval(getloc, 10000);
