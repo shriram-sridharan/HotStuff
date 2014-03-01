@@ -1,4 +1,25 @@
-if (( typeof cordova == 'undefined') && ( typeof Cordova == 'undefined'))
+document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		document.getElementById('data').innerHTML = "Device Ready";
+		document.addEventListener("pause", onPause, false);
+		document.addEventListener("resume", onResume, false);
+		
+		alert("Device is Ready");
+
+	}
+
+	//What to do when paused
+	function onPause() {
+		alert("paused!");
+	}
+
+	//What to do when resumed
+	function onResume() {
+		alert("resume");
+	}
+
+	if (( typeof cordova == 'undefined') && ( typeof Cordova == 'undefined'))
 		alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
 	if ( typeof CDV == 'undefined')
 		alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -21,33 +42,6 @@ if (( typeof cordova == 'undefined') && ( typeof Cordova == 'undefined'))
 		alert('auth.statusChange event');
 	});
 
-document.addEventListener("deviceready", onDeviceReady, false);
-	document.addEventListener('deviceready', function() {
-		try {
-			document.addEventListener("pause", onPause, false);
-			document.addEventListener("resume", onResume, false);
-			alert('Device is ready! Make sure you set your app_id below this alert.');
-			FB.init({
-				appId : "346598232144666",
-				nativeInterface : CDV.FB,
-				useCachedDialogs : false
-			});
-			document.getElementById('data').innerHTML = "";
-		} catch (e) {
-			alert(e);
-		}
-	}, false); 
-	
-	//What to do when paused
-	function onPause() {
-		alert("paused!");
-	}
-
-	//What to do when resumed
-	function onResume() {
-		alert("resume");
-	}
-	
 	/*function getSession() {
 	 alert("session: " + JSON.stringify(FB.getSession()));
 	 }
@@ -70,6 +64,11 @@ document.addEventListener("deviceready", onDeviceReady, false);
 	}
 
 	function login() {
+		FB.init({
+				appId : "346598232144666",
+				nativeInterface : CDV.FB,
+				useCachedDialogs : false
+			});
 		FB.login(function(response) {
 			if (response.session) {
 				alert('logged in');
@@ -80,3 +79,18 @@ document.addEventListener("deviceready", onDeviceReady, false);
 			scope : "email"
 		});
 	}
+
+	document.addEventListener('deviceready', function() {
+		try {
+			document.getElementById('data').innerHTML = "Device Ready";
+			alert('Device is ready! Make sure you set your app_id below this alert.');
+			FB.init({
+				appId : "346598232144666",
+				nativeInterface : CDV.FB,
+				useCachedDialogs : false
+			});
+			document.getElementById('data').innerHTML = "";
+		} catch (e) {
+			alert(e);
+		}
+	}, false); 
