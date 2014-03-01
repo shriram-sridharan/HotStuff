@@ -65,6 +65,7 @@ var headerWithButton = '';
 var header = "<h1>Chk't Out</h1>";
 
 function showRecos(data){
+	alert("in show recos");
 	recoHtml = '<h4>Yo, check these out:</h4>';
 	for (var i = 0, len = data.length; i < len; i++) {
 		recoHtml += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">';
@@ -73,7 +74,7 @@ function showRecos(data){
 		recoHtml += data[i].recommender;
 		recoHtml += '</strong> Distance: <strong>';
 		recoHtml += data[i].distance;
-		recoHtml += '</strong> miles';
+		recoHtml += '</strong> miles</p></div></div>';
 	}
 	document.getElementById('recommend').innerHTML = recoHtml;
 }
@@ -185,6 +186,7 @@ function get() {
 			JSON.stringify(jsoninput, "", ""), 
 			function(data) {
 				//document.getElementById('shouldLogin').innerHTML = data;
+				alert("calling show recos");
 				showRecos(data);
 			});
 
