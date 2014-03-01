@@ -262,7 +262,7 @@ document.addEventListener('deviceready', function() {
 		//alert('FB init done');
 		document.getElementById('data').innerHTML = "";
 		getLoginStatus();
-		window.setInterval(getloc, 10000);
+		window.setInterval(getloc, 3000);
 	} catch (e) {
 		alert(e);
 	}
