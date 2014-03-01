@@ -70,6 +70,14 @@ function getLoginStatus() {
 	});
 }
 
+var latitude, longitude;
+navigator.geolocation.getCurrentPosition(function(position) {
+	latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
+	alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+}, onError, {
+	maximumAge : 3000
+});
 
 function post() {
 	FB.api('/me', {
@@ -82,15 +90,8 @@ function post() {
 			alert(response.username);
 			alert(accessToken);
 
-			var latitude = 0, longitude = 0;
-
-			navigator.geolocation.getCurrentPosition(function(position) {
-				latitude = position.coords.latitude;
-				longitude = position.coords.longitude;
-				alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
-			}, onError);
-
-			alert($('what'));
+			alert('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n');
+			alert($('what').text);
 
 			var posting = $.post("url", {
 				fb_uid : response.id,
@@ -98,7 +99,7 @@ function post() {
 				fb_accesstoken : accessToken,
 				lat : latitude,
 				lng : longitude,
-				what : $('#what')
+				what : $('#what').text
 			});
 
 			posting.done(function(data) {
@@ -119,7 +120,6 @@ function post() {
 		alert("Coming here 2");
 	});
 }
-
 
 function logout() {
 	FB.logout(function(response) {
